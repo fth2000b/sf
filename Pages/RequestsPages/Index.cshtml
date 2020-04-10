@@ -1,0 +1,84 @@
+﻿@page
+@model ShopFinder.Pages.RequestsPages.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Requests[0].CustomerID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Requests[0].ShopID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Requests[0].BuyingItems)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Requests[0].IsCreditCardRequiredOnDlivery)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Requests[0].GPSLocation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Requests[0].RequestSendOn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Requests[0].RequestAcceptedOn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Requests[0].RequestStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Requests[0].Updated)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Requests) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShopID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BuyingItems)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsCreditCardRequiredOnDlivery)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GPSLocation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RequestSendOn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RequestAcceptedOn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RequestStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Updated)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

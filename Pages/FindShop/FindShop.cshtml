@@ -1,0 +1,93 @@
+﻿@page
+@model ShopFinder.Pages.FindShop.FindShopModel
+@{
+    ViewData["Title"] = "FindShop";
+}
+    <head>
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCx-VRag4yn9f9czgmzHr-8M9Lo_l_zbvQ"
+                type="text/javascript"></script>
+    </head>
+<h1>FindShop</h1>
+
+
+<script type="text/javascript">
+    function DisplayGoogleMap() {
+
+        //Set the Latitude and Longitude of the Map
+        var myAddress = new google.maps.LatLng(24.466807, 54.384297);
+
+        //Create Options or set different Characteristics of Google Map
+        var mapOptions = {
+            center: myAddress,
+            zoom: 15,
+            minZoom: 15,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+
+        //Display the Google map in the div control with the defined Options
+        var map = new google.maps.Map(document.getElementById("myDiv"), mapOptions);
+
+        //Set Marker on the Map
+        var marker = new google.maps.Marker({
+            position: myAddress,
+            animation: google.maps.Animation.BOUNCE,
+        });
+
+        marker.setMap(map);
+    }
+</script>
+
+<body onLoad="DisplayGoogleMap()">
+    <div id="myDiv" style="width:100%;height:500px;"></div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Shop[0].ShopName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Shop[0].IsOpen)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Shop[0].ConatctPerson)
+                </th>
+                <th>
+                   Address
+                </th>
+                <th>
+                   Contacts
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Shop != null)
+            {
+                @foreach (var item in Model.Shop)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ShopName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IsOpen)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ConatctPerson)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Address) +", "+ @Html.DisplayFor(modelItem => item.Address2)+", "+ @Html.DisplayFor(modelItem => item.City)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ContactNo1) +","+@Html.DisplayFor(modelItem => item.ContactNo2)+","+@Html.DisplayFor(modelItem => item.ContactNo3)
+                        </td>
+
+                        <td>
+                            <a asp-page="/RequestsPages/Create" asp-route-id="@item.ID">Buy</a>
+                        </td>
+                    </tr>
+                }
+            }
+
+        </tbody>
+    </table>
+</body>
