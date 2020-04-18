@@ -9,67 +9,91 @@
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>Requests</h4>
+    <h4>Request</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Requests.CustomerID)
+            @Html.DisplayNameFor(model => model.Request.UserID)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Requests.CustomerID)
+            @Html.DisplayFor(model => model.Request.UserID)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Requests.ShopID)
+            @Html.DisplayNameFor(model => model.Request.Shop)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Requests.ShopID)
+            @Html.DisplayFor(model => model.Request.Shop.ID)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Requests.BuyingItems)
+            @Html.DisplayNameFor(model => model.Request.MobileNo)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Requests.BuyingItems)
+            @Html.DisplayFor(model => model.Request.MobileNo)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Requests.IsCreditCardRequiredOnDlivery)
+            @Html.DisplayNameFor(model => model.Request.RequestStatus)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Requests.IsCreditCardRequiredOnDlivery)
+            @Html.DisplayFor(model => model.Request.RequestStatus)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Requests.GPSLocation)
+            @Html.DisplayNameFor(model => model.Request.DeliverAddress)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Requests.GPSLocation)
+            @Html.DisplayFor(model => model.Request.DeliverAddress)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Requests.RequestSendOn)
+            @Html.DisplayNameFor(model => model.Request.BuyingItems)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Requests.RequestSendOn)
+            @Html.DisplayFor(model => model.Request.BuyingItems)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Requests.RequestAcceptedOn)
+            @Html.DisplayNameFor(model => model.Request.IsCreditCardRequiredOnDlivery)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Requests.RequestAcceptedOn)
+            @Html.DisplayFor(model => model.Request.IsCreditCardRequiredOnDlivery)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Requests.RequestStatus)
+            @Html.DisplayNameFor(model => model.Request.GPSLocation)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Requests.RequestStatus)
+            @Html.DisplayFor(model => model.Request.GPSLocation)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Requests.Updated)
+            @Html.DisplayNameFor(model => model.Request.RequestSendOn)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Requests.Updated)
+            @Html.DisplayFor(model => model.Request.RequestSendOn)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Request.RequestAcceptedOn)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Request.RequestAcceptedOn)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Request.DilveryStarted)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Request.DilveryStarted)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Request.Dilverd)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Request.Dilverd)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Request.Updated)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Request.Updated)
         </dd>
     </dl>
     
     <form method="post">
-        <input type="hidden" asp-for="Requests.ID" />
+        <input type="hidden" asp-for="Request.ID" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-page="./Index">Back to List</a>
     </form>

@@ -23,6 +23,10 @@ namespace ShopFinder.Model
         {
             get; set;
         }
+        public List<CustRequest> Requests
+        {
+            get; set;
+        }
         public ShopCatagory ShopCatagory
         {
             get; set;

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using ShopFinder.Data;
 using ShopFinder.Model;
 
@@ -21,7 +22,8 @@ namespace ShopFinder.Pages.UserPages
 
         public IActionResult OnGet()
         {
-        ViewData["UserRoleID"] = new SelectList(_context.Set<UserRole>(), "ID", "ID");
+        ViewData["CityName"] = new SelectList(_context.City, "ID", "Name");
+        ViewData["UserRole"] = new SelectList(_context.UserRole, "ID", "Role");
             return Page();
         }
 
@@ -36,11 +38,21 @@ namespace ShopFinder.Pages.UserPages
             {
                 return Page();
             }
+            int  roleId = Int32.Parse(Request.Form["User.UserRole.Role"]);
+            int cityId = Int32.Parse(Request.Form["User.City.Name"]) ;
+
+            UserRole role =  await _context.UserRole.FirstOrDefaultAsync(m => m.ID == roleId);
+            City city = await _context.City.FirstOrDefaultAsync(m => m.ID == cityId);
+
+            User.Updated = DateTime.Now;
+            User.UserRole = role;
+            User.UserRoleID = role.ID;
+            User.City = city;
+            User.CityID = city.ID;
 
             _context.User.Add(User);
             await _context.SaveChangesAsync();
-
-            return RedirectToPage("/Login");
+            return RedirectToPage("./Index");
         }
     }
 }

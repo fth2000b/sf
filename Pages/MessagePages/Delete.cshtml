@@ -1,0 +1,46 @@
+﻿@page
+@model ShopFinder.Pages.MessagePages.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>RequestMessage</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.RequestMessage.RequestsID)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.RequestMessage.RequestsID)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.RequestMessage.Messsage)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.RequestMessage.Messsage)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.RequestMessage.MessageType)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.RequestMessage.MessageType)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.RequestMessage.Updated)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.RequestMessage.Updated)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="RequestMessage.ID" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
+</div>

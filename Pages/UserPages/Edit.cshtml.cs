@@ -31,13 +31,15 @@ namespace ShopFinder.Pages.UserPages
             }
 
             User = await _context.User
+                .Include(u => u.City)
                 .Include(u => u.UserRole).FirstOrDefaultAsync(m => m.ID == id);
 
             if (User == null)
             {
                 return NotFound();
             }
-           ViewData["UserRoleID"] = new SelectList(_context.Set<UserRole>(), "ID", "ID");
+           ViewData["CityID"] = new SelectList(_context.City, "ID", "ID");
+           ViewData["UserRoleID"] = new SelectList(_context.UserRole, "ID", "ID");
             return Page();
         }
 

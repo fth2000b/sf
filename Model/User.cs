@@ -24,7 +24,24 @@ namespace ShopFinder.Model
         {
             get; set;
         }
+       
+        public String Address
+        {
+            get; set;
+        }
+        public String Address2
+        {
+            get; set;
+        }
+        public int CityID
+        {
+            get; set;
+        }
 
+        public City City
+        {
+            get; set;
+        }
         public virtual UserRole UserRole
         {
             get; set;
@@ -36,7 +53,7 @@ namespace ShopFinder.Model
             get; set;
         }
       
-        public String ContactName
+        public String Name
         {
             get; set;
         }

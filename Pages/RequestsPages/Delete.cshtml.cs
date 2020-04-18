@@ -20,7 +20,7 @@ namespace ShopFinder.Pages.RequestsPages
         }
 
         [BindProperty]
-        public Requests Requests { get; set; }
+        public CustRequest Request { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -29,9 +29,10 @@ namespace ShopFinder.Pages.RequestsPages
                 return NotFound();
             }
 
-            Requests = await _context.Request.FirstOrDefaultAsync(m => m.ID == id);
+            Request = await _context.Request
+                .Include(r => r.Shop).FirstOrDefaultAsync(m => m.ID == id);
 
-            if (Requests == null)
+            if (Request == null)
             {
                 return NotFound();
             }
@@ -45,11 +46,11 @@ namespace ShopFinder.Pages.RequestsPages
                 return NotFound();
             }
 
-            Requests = await _context.Request.FindAsync(id);
+            Request = await _context.Request.FindAsync(id);
 
-            if (Requests != null)
+            if (Request != null)
             {
-                _context.Request.Remove(Requests);
+                _context.Request.Remove(Request);
                 await _context.SaveChangesAsync();
             }
 

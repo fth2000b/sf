@@ -1,5 +1,5 @@
 ﻿@page
-@model ShopFinder.Pages.ShopPages.CreateModel
+@model ShopFinder.Pages.ShopPages.MessageModel
 
 @{
     ViewData["Title"] = "Create";
@@ -56,18 +56,13 @@
             </div>
             <div class="form-group">
                 <label asp-for="Shop.ContactNo1" class="control-label"></label>
-                <input asp-for="Shop.ContactNo1" class="form-control" />
+                <input asp-for="Shop.ContactNo1" class="form-control" value="@ViewData["ContactNo1"]"/>
                 <span asp-validation-for="Shop.ContactNo1" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Shop.ContactNo2" class="control-label"></label>
                 <input asp-for="Shop.ContactNo2" class="form-control" />
                 <span asp-validation-for="Shop.ContactNo2" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Shop.ContactNo3" class="control-label"></label>
-                <input asp-for="Shop.ContactNo3" class="form-control" />
-                <span asp-validation-for="Shop.ContactNo3" class="text-danger"></span>
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">

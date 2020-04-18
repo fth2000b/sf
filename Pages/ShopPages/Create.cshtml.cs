@@ -10,11 +10,11 @@ using ShopFinder.Model;
 
 namespace ShopFinder.Pages.ShopPages
 {
-    public class CreateModel : PageModel
+    public class MessageModel : PageModel
     {
         private readonly ShopFinder.Data.ShopFinderContext _context;
 
-        public CreateModel(ShopFinder.Data.ShopFinderContext context)
+        public MessageModel(ShopFinder.Data.ShopFinderContext context)
         {
             _context = context;
         }
@@ -23,6 +23,8 @@ namespace ShopFinder.Pages.ShopPages
         {
         ViewData["CityID"] = new SelectList(_context.City, "ID", "Name");
         ViewData["ShopCatagoryID"] = new SelectList(_context.ShopCatagory, "ID", "Name");
+            var myComplexObject = HttpContext.Session.GetObjectFromJson<User>("User");
+            ViewData["ContactNo1"] = myComplexObject.MobileNo;
             return Page();
         }
 

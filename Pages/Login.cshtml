@@ -5,23 +5,32 @@
 }
 
 <h1>Login</h1>
-@Model.Msg
-<form method="post" asp-page="Login">
-    <table>
-        <tr>
-            <td>MobileNo</td>
-            <td><input type="text" asp-for="@Model.MobileNo" /></td>
-        </tr>
-        <tr>
-            <td>Password</td>
-            <td><input type="password" asp-for="@Model.Password" /></td>
-        </tr>
-        <tr>
-            <td>&nbsp;</td>
-            <td><input type="submit" value="Login" /></td>
-        </tr>
-    </table>
-    <p>
-        <a asp-page="/UserPages/Create">Create New</a>
-    </p>
-</form>
+<hr />
+<div class="row">
+
+    <div class="col-md-4">
+        <form method="post" asp-page="Login">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="@Model.MobileNo" class="control-label"></label>
+                <input asp-for="@Model.MobileNo" class="form-control"></>
+                <span asp-validation-for="@Model.MobileNo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Password" class="control-label"></label>
+                <input asp-for="@Model.Password" class="form-control"></>
+                <span asp-validation-for="@Model.Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <p><h4>@Model.Msg</h4></p>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="  Login " class="btn btn-primary" />
+            </div>
+            <div class="form-group">
+                <a asp-page="/UserPages/Create"  class="btn btn-primary">Register</a>
+            </div>
+        </form>
+    </div>
+</div>

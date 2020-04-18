@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿
+@using Microsoft.AspNetCore.Http
+@using ShopFinder.Model
+@inject IHttpContextAccessor HttpContextAccessor
+ 
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -8,20 +13,61 @@
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
+
+
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">ShopFinder</a>
+            <div class="container"> 
+                <h1> <a class="navbar-brand"  asp-area="" asp-page="/Index">ShopFinder</a> </h1>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        @*<li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-        </li>*@
-                        <li class="nav-item">
+                    <ul class="navbar-nav justify-content-end flex-grow-1">
+                        @{
+                            User user = HttpContextAccessor.HttpContext.Session.GetObjectFromJson<User>("User");
+                            if (user != null)
+                            {
+                                if (user.UserRole.Role == "Admin")
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-page="/ShopPages/Index">Shop</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-page="/CustomerPages/Index">Customer</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-page="/RequestsPages/Index">Requests</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-page="/DistricPages/Index">Distric</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-page="/ProvincePages/Index">Province</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-page="/CityPages/Index">City</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-page="/UserPages/Index">User</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-page="/UserRolePages/Index">User Role</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-page="/ShopCatagoryPages/Index">Shop Catagory</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-page="/Logout">Logout</a>
+                                    </li>
+                                }
+                                else if (user.UserRole.Role == "Buyer")
+                                {
+                                    @*<li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/ShopPages/Index">Shop</a>
                         </li>
                         <li class="nav-item">
@@ -44,16 +90,100 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/UserRolePages/Index">User Role</a>
-                        </li> 
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/ShopCatagoryPages/Index">Shop Catagory</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">LogOut</a>
-                        </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">LogOut</a>
+                    </li>*@
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-page="/Logout">Logout</a>
+                                    </li>
+
+                                }
+                                else if (user.UserRole.Role == "Seller")
+                                {
+                                    @*<li class="nav-item">
+                     <a class="nav-link text-dark" asp-area="" asp-page="/ShopPages/Index">Shop</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-page="/CustomerPages/Index">Customer</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-page="/RequestsPages/Index">Requests</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-page="/DistricPages/Index">Distric</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-page="/ProvincePages/Index">Province</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-page="/CityPages/Index">City</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-page="/UserPages/Index">User</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-page="/UserRolePages/Index">User Role</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-page="/ShopCatagoryPages/Index">Shop Catagory</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
+                    </li>*@
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-page="/Logout">Logout</a>
+                                    </li>
+
+                                }
+                            }
+                        }
+
+                        @*<li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-page="/ShopPages/Index">Shop</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-page="/CustomerPages/Index">Customer</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-page="/RequestsPages/Index">Requests</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-page="/DistricPages/Index">Distric</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-page="/ProvincePages/Index">Province</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-page="/CityPages/Index">City</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-page="/UserPages/Index">User</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-page="/UserRolePages/Index">User Role</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-page="/ShopCatagoryPages/Index">Shop Catagory</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">LogOut</a>
+        </li>*@
 
                     </ul>
                 </div>

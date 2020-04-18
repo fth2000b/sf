@@ -5,10 +5,10 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h2>My Shops</h2>
 
 <p>
-    <a asp-page="Create">Create New</a>
+    <a asp-page="Create"  class="btn btn-primary">Create New</a>
 </p>
 <table class="table">
     <thead>
@@ -21,7 +21,8 @@
                 @Html.DisplayNameFor(model => model.Shop[0].ShopCatagory)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Shop[0].IsOpen)
+               
+                 @Html.DisplayNameFor(model => model.Shop[0].IsOpen)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Shop[0].ConatctPerson)
@@ -43,18 +44,29 @@
                 @Html.DisplayFor(modelItem => item.ShopCatagory.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IsOpen)
+
+                @{
+                    if (item.IsOpen)
+                    {
+                        <span class="badge badge-success">Open</span>
+                    }
+                    else
+                    {
+                        <span class="badge badge-warning">Close</span>
+                    }
+                }
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ConatctPerson)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Address) + ":" +  @Html.DisplayFor(modelItem => item.Address2) + ":" +   @Html.DisplayFor(modelItem => item.City.ID);
+                @Html.DisplayFor(modelItem => item.Address),@Html.DisplayFor(modelItem => item.Address2), @Html.DisplayFor(modelItem => item.City.ID);
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+                |
+                <a asp-page="./Details" asp-route-id="@item.ID" class="btn btn-info">View Orders</a>
+                <a asp-page="./Edit" asp-route-id="@item.ID" class="btn btn-primary">Edit</a>
+                @*<a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>*@
             </td>
         </tr>
 }

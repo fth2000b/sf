@@ -29,6 +29,7 @@ namespace ShopFinder.Pages.UserPages
             }
 
             User = await _context.User
+                .Include(u => u.City)
                 .Include(u => u.UserRole).FirstOrDefaultAsync(m => m.ID == id);
 
             if (User == null)

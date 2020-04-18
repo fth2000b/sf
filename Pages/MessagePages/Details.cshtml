@@ -1,0 +1,43 @@
+﻿@page
+@model ShopFinder.Pages.MessagePages.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>RequestMessage</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.RequestMessage.RequestsID)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.RequestMessage.RequestsID)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.RequestMessage.Messsage)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.RequestMessage.Messsage)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.RequestMessage.MessageType)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.RequestMessage.MessageType)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.RequestMessage.Updated)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.RequestMessage.Updated)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.RequestMessage.ID">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

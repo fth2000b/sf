@@ -24,6 +24,7 @@ namespace ShopFinder.Pages.UserPages
         public async Task OnGetAsync()
         {
             User = await _context.User
+                .Include(u => u.City)
                 .Include(u => u.UserRole).ToListAsync();
         }
     }

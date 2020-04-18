@@ -7,57 +7,77 @@
 
 <h1>Edit</h1>
 
-<h4>Requests</h4>
+<h4>Request</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Requests.ID" />
+            <input type="hidden" asp-for="Request.ID" />
             <div class="form-group">
-                <label asp-for="Requests.CustomerID" class="control-label"></label>
-                <input asp-for="Requests.CustomerID" class="form-control" />
-                <span asp-validation-for="Requests.CustomerID" class="text-danger"></span>
+                <label asp-for="Request.UserID" class="control-label"></label>
+                <input asp-for="Request.UserID" class="form-control" />
+                <span asp-validation-for="Request.UserID" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Requests.ShopID" class="control-label"></label>
-                <input asp-for="Requests.ShopID" class="form-control" />
-                <span asp-validation-for="Requests.ShopID" class="text-danger"></span>
+                <label asp-for="Request.ShopID" class="control-label"></label>
+                <select asp-for="Request.ShopID" class="form-control" asp-items="ViewBag.ShopID"></select>
+                <span asp-validation-for="Request.ShopID" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Requests.BuyingItems" class="control-label"></label>
-                <input asp-for="Requests.BuyingItems" class="form-control" />
-                <span asp-validation-for="Requests.BuyingItems" class="text-danger"></span>
+                <label asp-for="Request.MobileNo" class="control-label"></label>
+                <input asp-for="Request.MobileNo" class="form-control" />
+                <span asp-validation-for="Request.MobileNo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Request.RequestStatus" class="control-label"></label>
+                <input asp-for="Request.RequestStatus" class="form-control" />
+                <span asp-validation-for="Request.RequestStatus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Request.DeliverAddress" class="control-label"></label>
+                <input asp-for="Request.DeliverAddress" class="form-control" />
+                <span asp-validation-for="Request.DeliverAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Request.BuyingItems" class="control-label"></label>
+                <input asp-for="Request.BuyingItems" class="form-control" />
+                <span asp-validation-for="Request.BuyingItems" class="text-danger"></span>
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Requests.IsCreditCardRequiredOnDlivery" /> @Html.DisplayNameFor(model => model.Requests.IsCreditCardRequiredOnDlivery)
+                    <input class="form-check-input" asp-for="Request.IsCreditCardRequiredOnDlivery" /> @Html.DisplayNameFor(model => model.Request.IsCreditCardRequiredOnDlivery)
                 </label>
             </div>
             <div class="form-group">
-                <label asp-for="Requests.GPSLocation" class="control-label"></label>
-                <input asp-for="Requests.GPSLocation" class="form-control" />
-                <span asp-validation-for="Requests.GPSLocation" class="text-danger"></span>
+                <label asp-for="Request.GPSLocation" class="control-label"></label>
+                <input asp-for="Request.GPSLocation" class="form-control" />
+                <span asp-validation-for="Request.GPSLocation" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Requests.RequestSendOn" class="control-label"></label>
-                <input asp-for="Requests.RequestSendOn" class="form-control" />
-                <span asp-validation-for="Requests.RequestSendOn" class="text-danger"></span>
+                <label asp-for="Request.RequestSendOn" class="control-label"></label>
+                <input asp-for="Request.RequestSendOn" class="form-control" />
+                <span asp-validation-for="Request.RequestSendOn" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Requests.RequestAcceptedOn" class="control-label"></label>
-                <input asp-for="Requests.RequestAcceptedOn" class="form-control" />
-                <span asp-validation-for="Requests.RequestAcceptedOn" class="text-danger"></span>
+                <label asp-for="Request.RequestAcceptedOn" class="control-label"></label>
+                <input asp-for="Request.RequestAcceptedOn" class="form-control" />
+                <span asp-validation-for="Request.RequestAcceptedOn" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Requests.RequestStatus" class="control-label"></label>
-                <input asp-for="Requests.RequestStatus" class="form-control" />
-                <span asp-validation-for="Requests.RequestStatus" class="text-danger"></span>
+                <label asp-for="Request.DilveryStarted" class="control-label"></label>
+                <input asp-for="Request.DilveryStarted" class="form-control" />
+                <span asp-validation-for="Request.DilveryStarted" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Requests.Updated" class="control-label"></label>
-                <input asp-for="Requests.Updated" class="form-control" />
-                <span asp-validation-for="Requests.Updated" class="text-danger"></span>
+                <label asp-for="Request.Dilverd" class="control-label"></label>
+                <input asp-for="Request.Dilverd" class="form-control" />
+                <span asp-validation-for="Request.Dilverd" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Request.Updated" class="control-label"></label>
+                <input asp-for="Request.Updated" class="form-control" />
+                <span asp-validation-for="Request.Updated" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

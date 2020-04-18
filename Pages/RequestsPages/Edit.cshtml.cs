@@ -21,7 +21,7 @@ namespace ShopFinder.Pages.RequestsPages
         }
 
         [BindProperty]
-        public Requests Requests { get; set; }
+        public CustRequest Request { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -30,12 +30,14 @@ namespace ShopFinder.Pages.RequestsPages
                 return NotFound();
             }
 
-            Requests = await _context.Request.FirstOrDefaultAsync(m => m.ID == id);
+            Request = await _context.Request
+                .Include(r => r.Shop).FirstOrDefaultAsync(m => m.ID == id);
 
-            if (Requests == null)
+            if (Request == null)
             {
                 return NotFound();
             }
+           ViewData["ShopID"] = new SelectList(_context.Shop, "ID", "ID");
             return Page();
         }
 
@@ -48,7 +50,7 @@ namespace ShopFinder.Pages.RequestsPages
                 return Page();
             }
 
-            _context.Attach(Requests).State = EntityState.Modified;
+            _context.Attach(Request).State = EntityState.Modified;
 
             try
             {
@@ -56,7 +58,7 @@ namespace ShopFinder.Pages.RequestsPages
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!RequestsExists(Requests.ID))
+                if (!RequestExists(Request.ID))
                 {
                     return NotFound();
                 }
@@ -69,7 +71,7 @@ namespace ShopFinder.Pages.RequestsPages
             return RedirectToPage("./Index");
         }
 
-        private bool RequestsExists(int id)
+        private bool RequestExists(int id)
         {
             return _context.Request.Any(e => e.ID == id);
         }

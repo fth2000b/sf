@@ -18,15 +18,25 @@ namespace ShopFinder.Pages.FindShop
         {
             _context = context;
         }
+       
 
+        [BindProperty]
+        public string geoLocations { get; set; }
 
         public IList<Shop> Shop { get; set; }
 
 
         public IActionResult OnGet()
         {
-            Shop = _context.Shop.Include(u => u.ShopCatagory).ToList();
+
+            Shop = _context.Shop.Include(u => u.ShopCatagory).Include(u => u.Requests).ToList();
             return Page();
         }
+
+        public async Task<IActionResult> OnPostAsync()
+        {
+            return RedirectToPage("./Index");
+        }
+
+        }
     }
-}

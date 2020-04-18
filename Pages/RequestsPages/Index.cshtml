@@ -13,72 +13,71 @@
 <table class="table">
     <thead>
         <tr>
+
             <th>
-                @Html.DisplayNameFor(model => model.Requests[0].CustomerID)
+                @Html.DisplayNameFor(model => model.Request[0].Shop)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Requests[0].ShopID)
+                @Html.DisplayNameFor(model => model.Request[0].MobileNo)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Requests[0].BuyingItems)
+                @Html.DisplayNameFor(model => model.Request[0].RequestStatus)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Requests[0].IsCreditCardRequiredOnDlivery)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Requests[0].GPSLocation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Requests[0].RequestSendOn)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Requests[0].RequestAcceptedOn)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Requests[0].RequestStatus)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Requests[0].Updated)
+                @Html.DisplayNameFor(model => model.Request[0].RequestSendOn)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Requests) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.CustomerID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ShopID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BuyingItems)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsCreditCardRequiredOnDlivery)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GPSLocation)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RequestSendOn)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RequestAcceptedOn)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RequestStatus)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Updated)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.Request)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Shop.ShopName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MobileNo)
+                </td>
+                <td>
+                    @{
+                        if (item.RequestStatus == "Send")
+                        {
+                            <span class="badge badge-primary">@item.RequestStatus</span>
+                        }
+                        else if (item.RequestStatus == "Accpeted")
+                        {
+                            <span class="badge badge-secondary">@item.RequestStatus</span>
+                        }
+                        else if (item.RequestStatus == "Processing")
+                        {
+                            <span class="badge badge-info">@item.RequestStatus</span>
+                        }
+                        else if (item.RequestStatus == "Delvering")
+                        {
+                            <span class="badge badge-warning">@item.RequestStatus</span>
+                        }
+                        else if (item.RequestStatus == "Deliverd")
+                        {
+
+                            <span class="badge badge-success">@item.RequestStatus</span>
+                        }
+                        else if (item.RequestStatus == "Decline")
+                        {
+                            <span class="badge badge-danger">@item.RequestStatus</span>
+                        }
+                    }
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RequestSendOn)
+                </td>
+                <td>
+                   @* <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |*@
+                    <a asp-page="./Details" asp-route-id="@item.ID" class="btn btn-info">View</a>
+                  @*  <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>*@
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

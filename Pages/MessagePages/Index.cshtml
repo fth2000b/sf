@@ -1,0 +1,54 @@
+﻿@page
+@model ShopFinder.Pages.MessagePages.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.RequestMessage[0].RequestsID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RequestMessage[0].Messsage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RequestMessage[0].MessageType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RequestMessage[0].Updated)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.RequestMessage) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RequestsID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Messsage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MessageType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Updated)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

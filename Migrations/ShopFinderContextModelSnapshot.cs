@@ -42,6 +42,64 @@ namespace ShopFinder.Migrations
                     b.ToTable("City");
                 });
 
+            modelBuilder.Entity("ShopFinder.Model.CustRequest", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("BuyingItems")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DeliverAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Dilverd")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DilveryStarted")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("GPSLocation")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsCreditCardRequiredOnDlivery")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("MobileNo")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("RequestAcceptedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("RequestMessageID")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("RequestSendOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("RequestStatus")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ShopID")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Updated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("UserID")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("RequestMessageID");
+
+                    b.HasIndex("ShopID");
+
+                    b.ToTable("Request");
+                });
+
             modelBuilder.Entity("ShopFinder.Model.Customer", b =>
                 {
                     b.Property<int>("ID")
@@ -113,43 +171,28 @@ namespace ShopFinder.Migrations
                     b.ToTable("Province");
                 });
 
-            modelBuilder.Entity("ShopFinder.Model.Requests", b =>
+            modelBuilder.Entity("ShopFinder.Model.RequestMessage", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("BuyingItems")
+                    b.Property<string>("MessageType")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CustomerID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("GPSLocation")
+                    b.Property<string>("Messsage")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsCreditCardRequiredOnDlivery")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("RequestAcceptedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("RequestSendOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("RequestStatus")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("ShopID")
-                        .HasColumnType("int");
+                    b.Property<string>("RequestsID")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Updated")
                         .HasColumnType("datetime2");
 
                     b.HasKey("ID");
 
-                    b.ToTable("Request");
+                    b.ToTable("RequestMessage");
                 });
 
             modelBuilder.Entity("ShopFinder.Model.Shop", b =>
@@ -253,11 +296,20 @@ namespace ShopFinder.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ContactName")
+                    b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Address2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CityID")
+                        .HasColumnType("int");
 
                     b.Property<int>("MobileNo")
                         .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
@@ -269,6 +321,8 @@ namespace ShopFinder.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("CityID");
 
                     b.HasIndex("UserRoleID");
 
@@ -302,6 +356,19 @@ namespace ShopFinder.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("ShopFinder.Model.CustRequest", b =>
+                {
+                    b.HasOne("ShopFinder.Model.RequestMessage", "RequestMessage")
+                        .WithMany()
+                        .HasForeignKey("RequestMessageID");
+
+                    b.HasOne("ShopFinder.Model.Shop", "Shop")
+                        .WithMany("Requests")
+                        .HasForeignKey("ShopID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("ShopFinder.Model.Distric", b =>
                 {
                     b.HasOne("ShopFinder.Model.Province", null)
@@ -328,6 +395,12 @@ namespace ShopFinder.Migrations
 
             modelBuilder.Entity("ShopFinder.Model.User", b =>
                 {
+                    b.HasOne("ShopFinder.Model.City", "City")
+                        .WithMany()
+                        .HasForeignKey("CityID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("ShopFinder.Model.UserRole", "UserRole")
                         .WithMany("Users")
                         .HasForeignKey("UserRoleID")

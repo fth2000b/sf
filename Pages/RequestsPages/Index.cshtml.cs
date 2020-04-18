@@ -19,11 +19,13 @@ namespace ShopFinder.Pages.RequestsPages
             _context = context;
         }
 
-        public IList<Requests> Requests { get;set; }
+        public IList<CustRequest> Request { get;set; }
 
         public async Task OnGetAsync()
         {
-            Requests = await _context.Request.ToListAsync();
+           User user =  HttpContext.Session.GetObjectFromJson<User>("User");
+            Request = await _context.Request
+                .Include(r => r.Shop).Where(r => r.UserID == user.ID).ToListAsync();
         }
     }
 }

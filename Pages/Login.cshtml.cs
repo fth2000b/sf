@@ -48,7 +48,7 @@ namespace ShopFinder.Pages
             }
             //User  user = await _context.User.Include(m => m.MobileNo == MobileNo).Include(m => m.UserRoleID = ).FirstOrDefaultAsync(m => m.UserRoleID == MobileNo);
 
-            User user = await _context.User.Include(i => i.UserRole).FirstOrDefaultAsync(m => m.MobileNo == MobileNo);
+            User user = await _context.User.Include(i => i.UserRole).Include(i => i.City).FirstOrDefaultAsync(m => m.MobileNo == MobileNo);
             if (user == null)
             {
                 Msg = "Invalid UserID";

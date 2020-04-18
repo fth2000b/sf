@@ -4,6 +4,7 @@ namespace ShopFinder.Pages
 {
     public class IndexModel : PageModel
     { 
+
        
     }
 }
