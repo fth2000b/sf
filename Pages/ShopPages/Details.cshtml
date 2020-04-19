@@ -7,140 +7,88 @@
 
     <h1>Buying Requests</h1>
 
+    <div>
+
+        <hr />
+        @Html.DisplayNameFor(model => model.Shop.ShopName)
+        <br />
+        @Html.DisplayFor(model => model.Shop.ShopName)
+        <br />
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Customer Mobile No
+                    </th>
+                    <th>
+                        Delivery Address
+                    </th>
+                    <th>
+                        Status
+                    </th>
+                    <th>
+
+                    </th>
+                    <th>
+
+                    </th>
+                    <th>
+
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Requests)
+                {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MobileNo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DeliverAddress)
+                    </td>
+                    <td>
+
+                        @{
+                            if (item.RequestStatus == "Send")
+                            {
+                                <span class="badge badge-primary">@item.RequestStatus</span>
+                            }
+                            else if (item.RequestStatus == "Accpeted")
+                            {
+                                <span class="badge badge-secondary">@item.RequestStatus</span>
+                            }
+                            else if (item.RequestStatus == "Processing")
+                            {
+                                <span class="badge badge-info">@item.RequestStatus</span>
+                            }
+                            else if (item.RequestStatus == "Delvering")
+                            {
+                                <span class="badge badge-warning">@item.RequestStatus</span>
+                            }
+                            else if (item.RequestStatus == "Deliverd")
+                            {
+
+                                <span class="badge badge-success">@item.RequestStatus</span>
+                            }
+                            else if (item.RequestStatus == "Decline")
+                            {
+                                <span class="badge badge-danger">@item.RequestStatus</span>
+                            }
+                        }
+                    </td>
+                    <td>
+                        <a asp-page="/RequestsPages/Details" asp-route-id="@item.ID" asp-route-action="View" class="btn btn-primary">View</a>
+                        <a asp-page="./Details" asp-route-id="@item.ID" asp-route-action="Accept" class="btn btn-warning">Accept</a>
+                        <a asp-page="./Details" asp-route-id="@item.ID" asp-route-action="Decline" class="btn btn-danger">Decline</a>
+                        <a asp-page="./Details" asp-route-id="@item.ID" asp-route-action="Message" class="btn btn-info">Message</a>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 <div>
-    <h4>Shop</h4>
-    <hr />
-    <table>
-        <tr>
-            <td>
-                <dl class="row">
-                     
-                    <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.Shop.ShopName)
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.Shop.ShopName)
-                    </dd>
-                    <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.Shop.ShopCatagory)
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.Shop.ShopCatagory.Name)
-                    </dd>
-                    <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.Shop.IsOpen)
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.Shop.IsOpen)
-                    </dd>
-                    <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.Shop.ConatctPerson)
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.Shop.ConatctPerson)
-                    </dd>
-                    <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.Shop.Address)
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.Shop.Address)
-                    </dd>
-                    <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.Shop.Address2)
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.Shop.Address2)
-                    </dd>
-                    <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.Shop.City)
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.Shop.City.Name)
-                    </dd>
-                     
-                    <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.Shop.ContactNo1)
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.Shop.ContactNo1)
-                    </dd>
-                    <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.Shop.ContactNo2)
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.Shop.ContactNo2)
-                    </dd>
-                     
-                    <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.Shop.IsDiliveryAvilabel)
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.Shop.IsDiliveryAvilabel)
-                    </dd>
-                    <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.Shop.IsCreditCardAccept)
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.Shop.IsCreditCardAccept)
-                    </dd>
-                    <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.Shop.IsCreditCardAcceptOnDeliveryLocation)
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.Shop.IsCreditCardAcceptOnDeliveryLocation)
-                    </dd>                  
-                </dl>
-            </td>
-            <td>
-                <table>
-
-                    <tr>
-                        <td>
-                            <table>
-                                @foreach (var item in Model.Requests)
-                                {
-                                    <tr>
-
-                                        <td class="col-sm-10">
-                                            @Html.DisplayFor(modelItem => item.ID)
-                                        </td>
-                                        <td class="col-sm-10">
-                                            @Html.DisplayFor(modelItem => item.MobileNo)
-                                        </td>
-                                        <td class="col-sm-10">
-                                            @Html.DisplayFor(modelItem => item.DeliverAddress)
-                                        </td>
-                                        <td class="col-sm-10">
-                                            @Html.DisplayFor(modelItem => item.BuyingItems)
-                                        <td class="col-sm-10">
-                                        </td>
-                                        <td class="col-sm-10">
-                                        <td >
-                                            @Html.DisplayFor(modelItem => item.IsCreditCardRequiredOnDlivery)
-                                        </td>
-                                        <td class="col-sm-10">
-                                        <td >
-                                            @Html.DisplayFor(modelItem => item.RequestSendOn)
-                                        </td>
-                                        <td class="col-sm-10">
-                                        <td>
-                                            <a asp-page="./Details" asp-route-id="@item.ID" asp-route-action="Accept">Accept</a> |
-                                            <a asp-page="./Details" asp-route-id="@item.ID" asp-route-action="Decline">Decline</a> |
-                                            <a asp-page="./Details" asp-route-id="@item.ID" asp-route-action="Message">Message</a> |
-                                        </td>
-                                    </tr>
-                                }
-
-                            </table>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-    </table>
-   
-</div>
-<div>
-    <a asp-page="./Edit" asp-route-id="@Model.Shop.ID">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
+    <a asp-page="./Edit" asp-route-id="@Model.Shop.ID" class="btn btn-primary">Edit</a>
+    <a asp-page="./Index" class="btn btn-primary">Back to List</a>
 </div>

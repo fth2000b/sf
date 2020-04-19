@@ -5,15 +5,12 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>My Shops</h2>
+<h1>My Shops</h1>
 
-<p>
-    <a asp-page="Create"  class="btn btn-primary">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
-            
+
             <th>
                 @Html.DisplayNameFor(model => model.Shop[0].ShopName)
             </th>
@@ -21,8 +18,8 @@
                 @Html.DisplayNameFor(model => model.Shop[0].ShopCatagory)
             </th>
             <th>
-               
-                 @Html.DisplayNameFor(model => model.Shop[0].IsOpen)
+
+                @Html.DisplayNameFor(model => model.Shop[0].IsOpen)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Shop[0].ConatctPerson)
@@ -34,41 +31,47 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Shop) {
-        <tr>
-           
-            <td>
-                @Html.DisplayFor(modelItem => item.ShopName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ShopCatagory.Name)
-            </td>
-            <td>
+        @foreach (var item in Model.Shop)
+        {
+            <tr>
 
-                @{
-                    if (item.IsOpen)
-                    {
-                        <span class="badge badge-success">Open</span>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ShopName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ShopCatagory.Name)
+                </td>
+                <td>
+
+                    @{
+                        if (item.IsOpen)
+                        {
+                            <span class="badge badge-success">Open</span>
+                        }
+                        else
+                        {
+                            <span class="badge badge-warning">Close</span>
+                        }
                     }
-                    else
-                    {
-                        <span class="badge badge-warning">Close</span>
-                    }
-                }
-            </td>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ConatctPerson)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address),@Html.DisplayFor(modelItem => item.Address2), @Html.DisplayFor(modelItem => item.City.ID)
+                </td>
+                <td>
+                    <a asp-page="./Details" asp-route-id="@item.ID" class="btn btn-info">View Orders</a>
+                    <a asp-page="./Edit" asp-route-id="@item.ID" class="btn btn-primary">Edit</a>
+                    @*<a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>*@
+                </td>
+            </tr>
+        }
+        <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.ConatctPerson)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Address),@Html.DisplayFor(modelItem => item.Address2), @Html.DisplayFor(modelItem => item.City.ID);
-            </td>
-            <td>
-                |
-                <a asp-page="./Details" asp-route-id="@item.ID" class="btn btn-info">View Orders</a>
-                <a asp-page="./Edit" asp-route-id="@item.ID" class="btn btn-primary">Edit</a>
-                @*<a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>*@
+                <a asp-page="Create" class="btn btn-primary">Add New</a>
             </td>
         </tr>
-}
     </tbody>
+    
 </table>

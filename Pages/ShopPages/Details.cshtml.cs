@@ -30,28 +30,40 @@ namespace ShopFinder.Pages.ShopPages
             {
                 return NotFound();
             }
-            if (Action == "Accept")
+            if (Action == null)
+            {
+                Shop = await _context.Shop
+                .Include(s => s.City)
+                .Include(s => s.ShopCatagory).FirstOrDefaultAsync(m => m.ID == id);
+                HttpContext.Session.SetObjectAsJson("Shop", Shop);
+                Requests = _context.Request.Where(s => s.ShopID == Shop.ID).ToList();
+                _shopId = Shop.ID;
+
+            }
+            else if (Action == "Accept")
             {
                 CustRequest custRequest = _context.Request.Where(s => s.ID == id).FirstOrDefault();
                 custRequest.RequestStatus = RequestStatus.Accpeted.ToString();
                 custRequest.RequestAcceptedOn = DateTime.Now;
                 _context.Request.Update(custRequest);
+                _context.SaveChanges();
 
-                Shop = await _context.Shop
-              .Include(s => s.City)
-              .Include(s => s.ShopCatagory).FirstOrDefaultAsync(m => m.ID == id);
+                Shop = HttpContext.Session.GetObjectFromJson<Shop>("Shop");
+
                 Requests = _context.Request.Where(s => s.ShopID == Shop.ID).ToList();
                 return Page();
-            } else if (Action == "Decline")
+            }
+            else if (Action == "Decline")
             {
+                Shop = HttpContext.Session.GetObjectFromJson<Shop>("Shop");
                 CustRequest custRequest = _context.Request.Where(s => s.ID == id).FirstOrDefault();
                 custRequest.RequestStatus = RequestStatus.Decline.ToString();
                 custRequest.Updated = DateTime.Now;
                 _context.Request.Update(custRequest);
+                _context.SaveChanges();
 
-                Shop = await _context.Shop
-              .Include(s => s.City)
-              .Include(s => s.ShopCatagory).FirstOrDefaultAsync(m => m.ID == id);
+                Shop = HttpContext.Session.GetObjectFromJson<Shop>("Shop");
+
                 Requests = _context.Request.Where(s => s.ShopID == Shop.ID).ToList();
                 return Page();
             }
@@ -64,18 +76,7 @@ namespace ShopFinder.Pages.ShopPages
                 hash.Add("shopId", custRequest.ShopID);
                 // tring pageName, string pageHandler, object routeValues
 
-                return RedirectToPage("/MessagePages/index","", custRequest);
-            }
-
-            Shop = await _context.Shop
-                .Include(s => s.City)
-                .Include(s => s.ShopCatagory).FirstOrDefaultAsync(m => m.ID == id);
-            Requests = _context.Request.Where (s => s.ShopID == Shop.ID).ToList();
-            _shopId = Shop.ID;
-
-            if (Shop == null)
-            {
-                return NotFound();
+                return RedirectToPage("/MessagePages/index", "", custRequest);
             }
             return Page();
         }

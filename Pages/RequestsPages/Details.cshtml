@@ -6,7 +6,7 @@
 }
 
 <div>
-    <h5 class="">Request Details</h5>
+    <h1 class="">Request Details</h1>
     <hr />
     <dl class="row">
          <dt class="col-sm-2">
@@ -40,7 +40,7 @@
             @Html.DisplayFor(model => model.Request.BuyingItems)
         </dd>
         <dt class="col-sm-2">
-           Is CreditCard Required On Dlivery
+           CreditCard Required 
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Request.IsCreditCardRequiredOnDlivery)
@@ -74,6 +74,9 @@
     </dl>
 </div>
 <div>
-    @*<a asp-page="./Edit" asp-route-id="@Model.Request.ID">Edit</a> |*@
-    <a asp-page="./Index" class="btn btn-primary">Back</a>
+   
+    <a asp-page="/ShopPages/Details" asp-route-id="@Model.Request.ID" asp-route-action="Accept" class="btn btn-warning">Accept</a>
+    <a asp-page="/ShopPages/Details" asp-route-id="@Model.Request.ID" asp-route-action="Decline" class="btn btn-danger">Decline</a>
+    <a asp-page="/ShopPages/Details" asp-route-id="@Model.Request.ID" asp-route-action="Message" class="btn btn-info">Message</a>
+    <a asp-page="/ShopPages/Details" class="btn btn-primary">Back</a>
 </div>
